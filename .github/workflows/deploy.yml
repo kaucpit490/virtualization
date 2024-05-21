@@ -20,6 +20,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  ValidateFlow:
+    name: ValidateFlow
   # Single deploy job since we're just deploying
   deploy:
     environment:
