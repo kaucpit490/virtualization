@@ -1,4 +1,6 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+## Cloud Computing Course: Virtualization and Docker Container Slides
+
+[![Deploy static content to Pages](https://github.com/kaucpit490/virtualization-slides/actions/workflows/deploy.yml/badge.svg)](https://github.com/kaucpit490/virtualization-slides/actions/workflows/deploy.yml)
 
 To start the slide show:
 
