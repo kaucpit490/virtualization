@@ -1,9 +1,9 @@
 {
-  "name": "virtualization",
+  "name": "virtualization-slides",
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build --base /virtualization/",
+    "build": "slidev build --base /virtualization-slides/",
     "dev": "slidev --open",
     "export": "slidev export"
   },
