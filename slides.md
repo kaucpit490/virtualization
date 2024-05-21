@@ -2,7 +2,7 @@
 # try also 'default' to start simple
 theme: default
 presenter: true
-title: 'Cloud Computing | Virtualization: VMs and Docker Containers'
+title: 'Cloud Computing | Virtualization: VMs and Containers'
 titleTemplate: '%s - CPIT-490'
 # apply any windi css classes to the current slide
 class: text-center
@@ -12,7 +12,7 @@ highlighter: shiki
 lineNumbers: false
 # some information about the slides, markdown enabled
 info: | 
-    Cloud Computing | Virtualization: VMs and Docker Containers
+    Cloud Computing | Virtualization: VMs and Containers
 # page transition
 transition: slide-left
 # use UnoCSS
@@ -22,7 +22,7 @@ selectable: true
 favicon: '/images/favicon.ico'
 # Make slides downloadable as PDF
 download: true
-exportFilename: cloud-computing-slides
+exportFilename: virtualization-slides
 export:
   format: pdf
   timeout: 30000
@@ -39,7 +39,7 @@ drawings:
 hideInToc: true
 ---
 
-# Virtualization: VMs and Docker Containers
+# Virtualization: VMs and Containers
 
 ### CPIT-490/632: Cloud Computing
 
@@ -146,7 +146,7 @@ A machine image is a single static unit that contains a pre-configured operating
 
 ---
 
-# Creating and Managing Custom Virtual Machine Images
+# Creating and Managing Custom VM Images
 - There're many virtualization systems that facilitate creating and managing virtual machine images.
   -  vSphere, the VMware virtualization suite of products.
 - There're special tools for building and managing portable virtual machine images and environments.
@@ -159,15 +159,18 @@ A machine image is a single static unit that contains a pre-configured operating
 # Vagrant
 - Vagrant is an open source tool for provisioning and managing virtual machine environments.
 - Vagrant can manage development environments running on a local virtualized platform such as VirtualBox or VMware, in the cloud via AWS, Azure, or any other provider, or in containers such as Docker.
+- Vagrant can be used to create and manage an Infrastructure as a Service (IaaS)-like environment locally.
 
 
 ---
 
 ## Vagrant: Getting Started (I)
-1. Install a hypervisor such as Oracle VirtualBox.
+1. Install a hypervisor such as Oracle VirtualBox or VMWare Fusion.
 2. [Install Vagrant](https://www.vagrantup.com) on your local environment.
-3. You will need to pick a Vagrant Box, the package format for Vagrant environments.
-  - Boxes can be installed locally from an image or from the [publicly available catalog of Vagrant boxes](https://vagrantcloud.com/boxes/search). 
+3. Install a plugin for your hypervisor:
+  - Vagrant comes with support out of the box for VirtualBox. However, if you are using VMware, you will need to install a plugin `vagrant plugin install vagrant-vmware-desktop`
+4. You will need to pick a Vagrant Box, the package format for Vagrant environments.
+5. Boxes can be installed locally from an image or from the [publicly available catalog of Vagrant boxes](https://vagrantcloud.com/boxes/search). 
 
 
 ---
@@ -179,33 +182,50 @@ A machine image is a single static unit that contains a pre-configured operating
   - `vagrant ssh`
 
 ---
+layout: center
+---
 
-##  Using Vagrant (I)
-- First Command:
+##  Using Vagrant (I) `vagrant init`
+
+<br>
+
 ```bash
-$ vagrant init centos/7
+vagrant init debian/bookworm64
 ```
-  - The command above will create a file called _Vagrantfile_ that contains all the provisioning  options to customize your VM (e.g., the amount of memory on the VM).
+
+- The command above will create a file called _Vagrantfile_ that contains all the provisioning options to customize your VM (e.g., the amount of memory on the VM).
+- `debian/bookworm64` is the name of the box, which is [Debian 12 (Bookworm)](https://app.vagrantup.com/debian/boxes/bookworm64).
+- A box is a package format for Vagrant environments
 
 
 ---
+layout: center
+---
 
-##  Using Vagrant (II)
-- Second Command:
+##  Using Vagrant (II) `vagrant up`
+
+<br>
+
 ```bash
-$ vagrant up
+vagrant up
 ```
-  - The command above will download, start, and provision the vagrant VM environment.
+
+- The command above will download, start, and provision the vagrant VM environment.
 
 
 ---
+layout: center
+---
 
-##  Using Vagrant (III)
-- Third Command:
+##  Using Vagrant (III) `vagrant ssh`
+
+<br>
+
 ```bash
-$ vagrant ssh
+vagrant ssh
 ```
-  - The command above will connect to the local VM from the host OS via SSH
+
+- The command above will connect to the local VM from the host OS via SSH
 - To shut down the VM instance, use the command `vagrant halt`
 
 
@@ -220,6 +240,8 @@ layout: center
 
 # Packer (I)
 
+<br>
+
 - [Packer](https://packer.io/) is an open source tool for building virtual machine images for multiple platforms from a single configuration file.
 - Packer can be used to generate new machine images for multiple platforms with the changes made to them.
 - This is in particular helpful in keeping development and production environments identical.
@@ -230,6 +252,12 @@ layout: center
 ---
 
 ## Packer (II)
+
+<br>
+
+- Packer and Vagrant are both tools developed by HashiCorp and they serve different but complementary purposes.
+  - Vagrant creates and manages development environments abstracting away the need for direct interaction with the graphical user interface of the hypervisor (e.g., VirtualBox or VMware).
+  - Packer Packer creates identical machine images for multiple platforms from a single configuration file.
 - Packer uses a template configuration file in JSON format.
 - Packer's template file defines how to create an image, add provisioning options, and install software and libraries for the image.
 - To build the custom image, run the command `packer build <custom_image.json>`
@@ -237,7 +265,11 @@ layout: center
 
 ---
 
+
 ## Packer: Getting Started
+
+<br>
+
 1. Download the Packer binary file from [https://packer.io](https://packer.io/)
 2. Create a packer template file
 3. Run 
@@ -251,6 +283,17 @@ layout: center
 ---
 
 ## Packer: Demo
+
+
+---
+layout: center
+---
+
+## Wrapping Up: Vagrant and Packer
+
+- You can use Packer to create machine images with your application and all of its dependencies, and then use Vagrant to manage environments where these images run locally. 
+
+- Both Vagrant and Packer are powerful tools to create identical and reproducible development, testing, and production environments.
 
 
 ---
