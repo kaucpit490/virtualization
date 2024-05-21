@@ -1,0 +1,16 @@
+{
+  "name": "virtualization",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build --base /virtualization/",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.49.3",
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "^1.44.0",
+    "vue": "^3.4.27"
+  }
+}
