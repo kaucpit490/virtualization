@@ -275,7 +275,7 @@ layout: center
 3. Run 
 
 ```bash
-$ packer build
+packer build
 ```
 
 ---
@@ -370,20 +370,36 @@ Images: 30
 ---
 
 ## Images vs Containers
-A Docker image is an executable package that includes everything needed to run an application (OS, libraries, and configuration files). It is the building block that docker uses to build containers. A docker image is made up of file systems layered over each other.
+<br>
 
-A container is the running instance of an image. When an image is running, it's called a container. You can see a list of your running containers with the command, `docker ps`.
+- A **Docker image** is an executable package that includes everything needed to run an application (OS, libraries, and configuration files). 
+  - It is the building block that docker uses to build containers. 
+  - A docker image is made up of file systems layered over each other.
+  - You can see a list of your Docker images with the command, `docker images`.
+
+- A **Docker container** is the running instance of an image. 
+  - When an image is running, it's called a container. 
+  - You can see a list of your running containers with the command, `docker ps`.
 
 ---
 
 # Dockerfile
-A _Dockerfile_ is a text document that contains all the commands or instructions to build a docker image.
+
+<br>
+
+- A _Dockerfile_ is a text document that contains all the commands or instructions to build a docker image.
 
 ```
-FROM centos
-RUN yum -y install nano && yum -y update
-CMD ["/bin/bash"]
+FROM alpine:latest
+RUN apk update && apk add nano
+CMD ["/bin/sh"]
 ```
+
+  - The Alpine Linux distribution is a lightweight, secure, and simple Linux distribution commonly used as the base layer in Docker images.
+  - `apk` is the package manager for Alpine Linux similar to `apt` in Debian.
+  - `RUN apk update && apk add nano` will update system packages and install nano.
+  - `CMD ["/bin/sh"]`. This is the default command that the container runs, which is starting a new shell session
+
 
 ---
 
@@ -402,10 +418,12 @@ docker build -t hello-docker:v1 .
 - To run the created image, run:
 
 ```bash
-$ docker run -i -t hello-docker:v1
+docker run -i -t hello-docker:v1
 ```
   - This will run the command defined in the _Dockerfile_, which was running the bash command, in a new docker container.
-  - The `-i` option will run in interactive mode to keep the STDIN open and the `-t` option will allocate a pseudo-TTY.
+  - The `-i` option will run in interactive mode to keep the STDIN open
+  - The `-t` option will allocate a pseudo-TTY. This attaches your terminal to the interactive shell in the container.
+    - These two options are often combined as `-it`
 
 ---
 
@@ -453,12 +471,12 @@ CMD ["java", "App"]
 3. Build an image from the _Dockerfile_
 
 ```bash
-$ docker build -t java-container:latest .
+docker build -t java-container:latest .
 ```
 4. Run the container
    
 ```bash
-$ docker run java-container:latest
+docker run java-container:latest
 ```
 
 
